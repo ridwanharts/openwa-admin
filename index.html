@@ -65,19 +65,18 @@
       });
     }
 
-    function kirimPesan(index) {
-      const item = nomorList[index];
-      const message = `Assalamu'alaikum ${item.nama}, kami ingatkan untuk pembayaran SPP bulan ini. Semoga diberi kelancaran rezeki, aamiin.`;
+fetch('https://wa-api.ridwanharts.my.id/send-message', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({number: item.nomor, message}),
+})
+.then(res => {
+  if (!res.ok) throw new Error('Server error ' + res.status);
+  return res.json();
+})
+.then(data => alert('Pesan terkirim!'))
+.catch(err => alert('Gagal kirim pesan: ' + err.message));
 
-      fetch('https://wa-api.ridwanharts.my.id/send-message', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({number: item.nomor, message}),
-      })
-      .then(res => res.json())
-      .then(data => alert('Pesan terkirim!'))
-      .catch(err => alert('Gagal kirim pesan'));
-    }
 
     function editNomor(index) {
       const item = nomorList[index];
