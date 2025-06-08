@@ -72,7 +72,7 @@
       fetch('https://wa-api.ridwanharts.my.id/send-message', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({number: item.nomor, message}),
+        body: JSON.stringify({phone: item.nomor, message}),
       })
       .then(res => res.json())
       .then(data => alert('Pesan terkirim!'))
